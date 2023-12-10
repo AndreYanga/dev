@@ -1,0 +1,207 @@
+* {
+  /*tirar todas a magens padrão do navegador*/
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; /*a medida da coisxa tem que ser o tamanho da borda */
+}
+
+/*light*/
+:root {
+  /* variavel em css*/
+  --text-color: white;
+  --bg-url: url(./assets/fundo.jpg);
+  --strok-color: rgba(255, 255, 255, 0.5); /*cor das bordas */
+  --surface-color: rgba(255, 255, 255, 0.1);
+  --surface-color-hover: rgba(255, 255, 255, 0.05);
+  --highlight-color: rgba(255, 255, 255, 0.02);
+  --switch-bg-url: url(./assets/moon-stars.svg);
+}
+
+.light {
+  --text-color: black;
+  --bg-url: url(./assets/fundo-light.jpg);
+  --strok-color: rgba(0, 0, 0, 0.5);
+  --surface-color: rgba(0, 0, 0, 0.05);
+  --surface-color-hover: rgba(0, 0, 0, 0.02);
+  --highlight-color: rgba(0, 0, 0, 0.1);
+  --switch-bg-url: url(./assets/sun.svg);
+}
+
+/*   */
+
+body {
+  /*  background: color image repeat position/ size*/
+  background: var(--bg-url) no-repeat top center/cover;
+  height: 100vh; /* toda tela fica coberta na vertical(altura)*/
+}
+/* body inteiro selector universal vai aplicar em todos elementos do body*/
+body * {
+  font-family: "Inter", sans-serif;
+  color: var(--text-color);
+}
+
+#container {
+  width: 100%; /*adaptamos para qualquer dispositivo*/
+  max-width: 588px; /*o maximo da tela do dispositivo maior*/
+  margin: 56px auto 0px;
+  padding: 0 24px;
+}
+/* profile */
+#profile {
+  text-align: center;
+  padding: 24px;
+}
+#profile img {
+  width: 112px;
+  border-radius: 50%;
+}
+
+#profile p {
+  font-weight: 500;
+  font-size: 16px;
+  margin-top: 8px;
+}
+/* switch */
+
+#switch {
+  position: relative;
+  width: 64px;
+
+  margin: 4px auto;
+}
+#switch button {
+  width: 32px;
+  height: 32px;
+  background: white var(--switch-bg-url) no-repeat center;
+  border: 0;
+  border-radius: 50%;
+
+  /*colocar um elemento por cima do outro*/
+  /*sobreposição de camadas*/
+  /*estrategia alinhar posicionamento absoluto*/
+  position: absolute;
+  top: 50%;
+  left: 0;
+  z-index: 1;
+  transform: translateY(-50%);
+
+  /*animação */
+  animation: slide-back 0.4s;
+}
+#switch button:hover {
+  outline: 8px solid var(--highlight-color);
+}
+
+.light #switch button {
+  /*right: 0;
+  left: initial;
+  fizemos alterar para animação do botão*/
+  animation: slide-in 0.4s forwards;
+  /*forwards matem as propriedades finas da animação*/
+}
+
+#switch span {
+  /*ele não vai aceitar algumas propriedades como altura e largura então vamos colocar o -- */
+  display: block; /*--*/
+  width: 64px;
+  height: 24px;
+  background: var(--surface-color);
+  border: 1px solid var(--strok-color);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border-radius: 9999px;
+}
+
+/* links */
+ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  padding: 24px 0; /*seperior 24 inferior 24 e 0 lat*/
+}
+ul li a {
+  display: flex;
+  align-items: center; /*coloca o item no centro na horizontal*/
+  justify-content: center; /* na vertical */
+  padding: 16px 24px;
+
+  background: var(--surface-color);
+  border: 1px solid var(--strok-color);
+  border-radius: 8px;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+
+  text-decoration: none;
+  font-weight: 500;
+
+  transition: background 0.2s;
+}
+
+/*pseudo selector hover quando passar o mouse ensima*/
+ul li a:hover {
+  background: var(--surface-color-hover);
+  border: 1.5px solid var(--text-color);
+}
+
+/* social links */
+#social-links {
+  display: flex;
+  justify-content: center; /*colocar logos centro*/
+
+  padding: 24px 0; /*24 em cima nas laterais 0*/
+  font-size: 24px;
+}
+#social-links a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+
+  transition: background 0.2s;
+  border-radius: 50%;
+}
+
+#social-links a:hover {
+  background: var(--highlight-color);
+}
+
+footer {
+  padding: 24px 0;
+  text-align: center;
+  font-size: 14px;
+}
+
+/* media quries*/
+/*na sua largura minima de 700 px para adiciona */
+/*adaptar para qualquer dispositivo*/
+@media (min-width: 700px) {
+  :root {
+    --bg-url: url(./assets/fundo.jpg);
+  }
+  .light {
+    --bg-url: url(./assets/fundo-light.jpg);
+  }
+}
+
+/*animações*/
+@keyframes slide-in {
+  /*para deslizar ele vai começar do 0 ate 50%*/
+  from {
+    left: 0;
+  }
+  to {
+    left: 50%;
+  }
+}
+
+@keyframes slide-back {
+  /*para deslizar ele vai começar do 0 ate 50%*/
+  from {
+    left: 50%;
+  }
+  to {
+    left: 0;
+  }
+}
